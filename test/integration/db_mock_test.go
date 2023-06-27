@@ -33,6 +33,13 @@ func newMockDbStore() *mockStore {
 
 func cycles(name string) []xeolDB.Cycle {
 	cycleDict := map[string][]xeolDB.Cycle{
+		"dotnet": {
+			{
+				ProductName:  "Microsoft .NET",
+				ReleaseCycle: "5.0",
+				Eol:          "2022-05-08",
+			},
+		},
 		"node": {
 			{
 				ProductName:  "Node.js",
@@ -149,6 +156,7 @@ func cycles(name string) []xeolDB.Cycle {
 }
 
 func (d *mockStore) stub() {
+	d.backend["pkg:nuget/Microsoft.NETCore.App"] = cycles("dotnet")
 	d.backend["cpe:/o:fedoraproject:fedora"] = cycles("fedora")
 	d.backend["pkg:generic/redis"] = cycles("redis")
 	d.backend["pkg:generic/node"] = cycles("node")
